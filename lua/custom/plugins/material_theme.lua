@@ -15,16 +15,10 @@ return {
       'f-person/auto-dark-mode.nvim',
       opts = {
         set_dark_mode = function()
-          print 'dark'
-          -- Change to 'darker' Material theme when dark mode is detected
-          vim.g.material_style = 'darker'
-          vim.cmd 'colorscheme material' -- Apply the theme again
+          require('material.functions').change_style 'darker'
         end,
         set_light_mode = function()
-          print 'light'
-          -- Change to 'lighter' Material theme when light mode is detected
-          vim.g.material_style = 'lighter'
-          vim.cmd 'colorscheme material' -- Apply the theme again
+          require('material.functions').change_style 'lighter'
         end,
         update_interval = 100,
         fallback = 'dark',
