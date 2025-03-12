@@ -580,8 +580,28 @@ require("lazy").setup({
 			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 			local servers = {
-				-- clangd = {},
+				clangd = {
+					keys = {
+						{ "<leader>co", "<cmd>ClangdSwitchSourceHeader<co>", desc = "Switch Source/Header (C/C++)" },
+					},
+					capabilities = cmp_nvim_lsp.default_capabilities(),
+					cmd = {
+						"clangd",
+						"--header-insertion=never",
+						"--fallback-style=llvm",
+					},
+				},
+				codelldb = {},
+				jsonls = {},
+				rust_analyzer = {
+					["rust-analyzer"] = {
+						checkOnSave = {
+							command = "clippy",
+						},
+					},
+				},
 				-- gopls = {},
 				-- pyright = {},
 				-- rust_analyzer = {},
